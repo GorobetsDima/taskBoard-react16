@@ -1,0 +1,16 @@
+.NavBar.navbar{
+    margin:0;
+}
+
+.NavBar .navbar-text{
+    font-size:large;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.NavBar .container{
+    margin:0;
+    width: inherit;
+    padding-top: 7px;
+    padding-bottom: 5px;
+}

@@ -1,0 +1,20 @@
+.BoardCard{
+  text-align: left;
+  background-color: #fcfcfc;
+  border: 1px solid #bebfc7;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+}
+.CardTitle{
+  font-weight: bold;
+}
+.buttonGroup{
+  text-align: right;
+  /*float: left*/
+}
+
+.CardEdit.btn, .CardDelete.btn{
+  padding: 6px 6px;
+  background-color: transparent;
+}

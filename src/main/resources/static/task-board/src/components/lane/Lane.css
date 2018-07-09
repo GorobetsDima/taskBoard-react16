@@ -1,0 +1,66 @@
+
+.Lane {
+    /*display:inline-block;*/
+    /**display:inline; !* for IE7*!*/
+    /**zoom:1;!* for IE7*!*/
+    /*min-width:100px;*/
+    /*min-height:50px;*/
+    /*width: auto;*/
+    /*text-align: center;*/
+    background-color: #e3e3e3;
+    border: 2px solid white;
+    border-radius: 5px;
+    /*margin: 1px;*/
+    /*width: 15%;*/
+    padding: 1px;
+}
+
+.LaneHeader {
+    text-align: center;
+    background-color: #e8e8e8;
+    border-bottom: 1px solid #bebfc7;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.Lane.col-sm-2 {
+    padding-right: inherit;
+    padding-left: inherit;
+    /*display:inline-block;*/
+    /*min-width:100px;*/
+    /*min-height:50px;*/
+}
+
+.buttonGroup {
+    text-align: right;
+    /*float: left*/
+}
+
+.LaneName {
+    text-align: left;
+    float: left
+}
+
+.LaneTitle {
+    text-align: left;
+    float: left
+}
+.LaneInfo{
+    border-top: 1px solid #bebfc7;
+    /*padding: 5px;*/
+    font-weight: normal;
+}
+
+.LaneLabel {
+    /*text-align: right;*/
+    /*float: right*/
+}
+
+.addButton.btn{
+    padding: 1px 6px;
+    background-color: white;
+}
+
+.counter.btn{
+    padding: 1px 6px;
+}

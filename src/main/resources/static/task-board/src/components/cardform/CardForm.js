@@ -3,9 +3,6 @@ import {connect} from "react-redux";
 import {Field, reduxForm} from "redux-form";
 import {Button} from "reactstrap";
 import {Glyphicon} from "react-bootstrap";
-// import {withRouter} from "react-router-dom";
-// import {Link} from "react-router-dom";
-// import {browserHistory} from "react-router";
 import {validate} from "../../utils/utils";
 import "./CardForm.css";
 
@@ -64,8 +61,9 @@ class CardForm extends Component {
     }
 
     createOrUpdateCard(values) {
-        const {laneId, createOrUpdateCard, cardId} = this.props;
-        createOrUpdateCard(laneId, cardId, values);
+        const {laneId, createOrUpdateCard, cardId, saveOrUpdateCard} = this.props;
+        // createOrUpdateCard(laneId, cardId, values);
+        saveOrUpdateCard(laneId, cardId, values);
     }
 
     render() {

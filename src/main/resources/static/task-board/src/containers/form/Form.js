@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import CardForm from "../../components/cardform/CardForm";
 import NavBar from "../../components/navbar/NavBar";
-import {cardActions} from "../../actions/actions";
+import {cardActions, saveOrUpdateCard} from "../../actions/actions";
 import {withRouter} from "react-router-dom";
 
 @connect(
@@ -14,6 +14,7 @@ import {withRouter} from "react-router-dom";
     }),
     {
         createOrUpdateCard: cardActions.card.addorupdate,
+        saveOrUpdateCard
     })
 
 class Form extends Component {
@@ -29,6 +30,7 @@ class Form extends Component {
 
     static propTypes = {
         createOrUpdateCard: PropTypes.func,
+        saveOrUpdateCard: PropTypes.func
     };
 
 
@@ -41,7 +43,7 @@ class Form extends Component {
 
 
     render() {
-        const {match:{params:{laneId, cardId}}, updatedCard, createOrUpdateCard, history} = this.props;
+        const {match:{params:{laneId, cardId}}, createOrUpdateCard, history, saveOrUpdateCard} = this.props;
         return (
 
             <div className="container">
@@ -50,7 +52,7 @@ class Form extends Component {
                     cardId={cardId}
                     laneId={laneId}
                     createOrUpdateCard={createOrUpdateCard}
-                    updatedCard={updatedCard}
+                    saveOrUpdateCard={saveOrUpdateCard}
                     history={history}
                 />
             </div>

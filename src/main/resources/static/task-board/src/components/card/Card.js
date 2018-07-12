@@ -18,9 +18,9 @@ class BoardCard extends Component {
     }
 
     editCard() {
-        const {laneId, card, getUpdatedCard, history}=this.props;
+        const {laneId, card, getUpdatedCard, history, laneIdd}=this.props;
         getUpdatedCard(laneId, card.id);
-        history.push(`/cardForm/${laneId}/${card.id}`);
+        history.push(`/cardForm/${laneIdd}/${card.id}`);
     }
 
     render() {

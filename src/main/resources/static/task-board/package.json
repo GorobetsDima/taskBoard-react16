@@ -2,7 +2,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server & DEBUG=express* node ./nodeserver/index.js"
   },
   "dependencies": {
     "axios": "~0.14.0",
@@ -22,6 +22,7 @@
     "babel-preset-react": "~6.16.0",
     "babel-preset-stage-1": "~6.16.0",
     "babel-runtime": "~6.11.6",
+    "body-parser": "^1.18.3",
     "bootstrap": "^3.3.7",
     "css-loader": "~0.23.1",
     "express": "^4.16.3",

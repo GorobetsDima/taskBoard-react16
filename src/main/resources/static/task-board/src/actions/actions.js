@@ -8,7 +8,7 @@ export const laneActions = createActions({
         FETCH: () => ({isLoading: true}),
         FETCHSUCCESS: data => ({data}),
         FETCHFAILURE: error => ({message: error}),
-        EXPRESS: data => ({info: data})
+        EXPRESS: data => ({lanes: data})
     }
 });
 
@@ -68,6 +68,31 @@ export const deleteCard = (laneId, cardId) => {
         ;
 };
 
+
+export const saveOrUpdateCard = (laneId, cardId, card) => {
+
+    return (dispatch) => {
+
+        // dispatch(cardActions.card.delete());
+
+        const response = axios.post('/api/saveCard', {
+            'card': card,
+            'laneId': laneId});
+
+        return response.then(
+            () => {
+                toastr.success('Save card', 'success');
+                // dispatch(cardActions.card.deletesuccess(laneId, cardId));
+            },
+            error => {
+                toastr.error(error);
+                // dispatch(cardActions.card.deletefailure(error));
+            }
+        );
+    }
+        ;
+};
+
 const pending = (data) => {
 
     return new Promise((resolve, reject) => {
@@ -81,14 +106,22 @@ const pending = (data) => {
 };
 
 export const expressFetch = () => {
+
     return (dispatch) => {
-        const response = axios.get('/express_backend');
+
+        dispatch(laneActions.lane.fetch());
+
+        const response = axios.get('/api/lanes');
 
         return response.then(
             resp => {
-                dispatch(laneActions.lane.express(resp.data.express))
+                toastr.success('Loading lanes from server', 'success');
+                dispatch(laneActions.lane.fetchsuccess(resp.data.lanes));
+                // dispatch(laneActions.lane.express(resp.data.express))
             }, error => {
-                console.log(error);
+                toastr.error(error);
+                dispatch(laneActions.lane.fetchfailure(error));
+                // console.log(error);
             }
         )
     }

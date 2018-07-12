@@ -6,8 +6,7 @@ import {handleActions, combineActions} from "redux-actions";
 const initialBorderState = {
     lanes: [],
     updatedCard: {},
-    filteredLanes: [],
-    express: ''
+    filteredLanes: []
 };
 
 
@@ -18,14 +17,6 @@ export const boardReducer = handleActions({
                 lanes: [...data]
             };
         },
-        [laneActions.lane.express] (state, {payload:{info}}) {
-            return {
-                ...state,
-                express: info
-
-            };
-        },
-
         [cardActions.card.deletesuccess] (state, {payload:{laneId, cardId}}){
             return {
                 lanes: state.lanes.map(lane => deleteLaneCards(laneId, cardId, lane))
@@ -39,7 +30,8 @@ export const boardReducer = handleActions({
         ,
         [cardActions.card.getupdated] (state, {payload:{laneId, cardId}}){
             return {
-                updatedCard: getCardToUpdate(laneId, cardId, state.lanes), ...state
+                ...state,
+                updatedCard: getCardToUpdate(laneId, cardId, state.lanes)
             }
         },
         [cardActions.card.move] (state, {payload:{source, destination}}){

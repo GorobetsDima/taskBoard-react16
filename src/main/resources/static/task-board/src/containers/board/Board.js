@@ -14,7 +14,7 @@ import {Row} from "reactstrap";
     state => ({
         lanes: state.boardReducer.lanes,
         filteredLanes: state.boardReducer.filteredLanes,
-        express: state.boardReducer.express
+        // express: state.boardReducer.express
 
     }), {
         getUpdatedCard: cardActions.card.getupdated,
@@ -22,7 +22,7 @@ import {Row} from "reactstrap";
         reorderCards: cardActions.card.reorder,
         filterCards: cardActions.card.filter,
         resetFilter: cardActions.card.resetfilter,
-        fetchTasks,
+        // fetchTasks,
         deleteCard,
         expressFetch
     }
@@ -47,8 +47,8 @@ export default class Board extends Component {
     };
 
     componentDidMount() {
-        const {fetchTasks}= this.props;
-        fetchTasks(data.lanes);
+        // const {fetchTasks}= this.props;
+        // fetchTasks(data.lanes);
 
         const {expressFetch} = this.props;
 
@@ -130,7 +130,7 @@ export default class Board extends Component {
 
     render() {
 
-        const {lanes, filteredLanes, deleteCard, getUpdatedCard, addCard, editCard, resetFilter, filterCards, express} = this.props;
+        const {lanes, filteredLanes, deleteCard, getUpdatedCard, addCard, editCard, resetFilter, filterCards} = this.props;
         let i = 0;
 
         const displayLanes = filteredLanes && filteredLanes.length ? filteredLanes : lanes;

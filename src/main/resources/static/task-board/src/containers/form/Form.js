@@ -14,6 +14,7 @@ import {withRouter} from "react-router-dom";
     }),
     {
         createOrUpdateCard: cardActions.card.addorupdate,
+        createOrUpdateCardSaga: cardActions.card.addorupdatesaga,
         saveOrUpdateCard
     })
 
@@ -30,7 +31,8 @@ class Form extends Component {
 
     static propTypes = {
         createOrUpdateCard: PropTypes.func,
-        saveOrUpdateCard: PropTypes.func
+        saveOrUpdateCard: PropTypes.func,
+        createOrUpdateCardSaga: PropTypes.func
     };
 
 
@@ -43,7 +45,7 @@ class Form extends Component {
 
 
     render() {
-        const {match:{params:{laneId, cardId}}, createOrUpdateCard, history, saveOrUpdateCard} = this.props;
+        const {match:{params:{laneId, cardId}}, createOrUpdateCard, history, saveOrUpdateCard, createOrUpdateCardSaga} = this.props;
         return (
 
             <div className="container">
@@ -53,6 +55,7 @@ class Form extends Component {
                     laneId={laneId}
                     createOrUpdateCard={createOrUpdateCard}
                     saveOrUpdateCard={saveOrUpdateCard}
+                    createOrUpdateCardSaga={createOrUpdateCardSaga}
                     history={history}
                 />
             </div>

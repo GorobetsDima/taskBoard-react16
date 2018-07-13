@@ -61,9 +61,10 @@ class CardForm extends Component {
     }
 
     createOrUpdateCard(values) {
-        const {laneId, createOrUpdateCard, cardId, saveOrUpdateCard} = this.props;
+        const {laneId, createOrUpdateCard, cardId, saveOrUpdateCard, createOrUpdateCardSaga} = this.props;
         // createOrUpdateCard(laneId, cardId, values);
-        saveOrUpdateCard(laneId, cardId, values);
+        // saveOrUpdateCard(laneId, cardId, values);
+        createOrUpdateCardSaga(laneId, cardId, values);
     }
 
     render() {

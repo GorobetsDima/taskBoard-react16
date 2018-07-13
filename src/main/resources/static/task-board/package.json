@@ -2,7 +2,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server & DEBUG=express* node ./nodeserver/index.js"
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "axios": "~0.14.0",
@@ -51,6 +51,7 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.4.0",
     "redux-form": "^7.4.2",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.3.0",
     "sass-loader": "~4.0.0",
     "style-loader": "~0.13.1",

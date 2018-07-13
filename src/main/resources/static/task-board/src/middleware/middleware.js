@@ -1,5 +1,6 @@
 import {applyMiddleware, compose} from "redux";
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import {FETCH_DATA} from "../constants/action-types";
 import {fetchDataSuccess, fetchDataFailure} from "../actions/actions";
 
@@ -28,9 +29,13 @@ const boardMiddleware = store => next => action => {
     }
 };
 
+export const sagaMiddleware = createSagaMiddleware();
 
-const middlewareArray = [boardMiddleware, thunk];
+const middlewareArray = [boardMiddleware,
+    // thunk,
+    sagaMiddleware];
 
 const middleware = composeEnhancers(applyMiddleware(...middlewareArray));
+
 
 export default middleware;

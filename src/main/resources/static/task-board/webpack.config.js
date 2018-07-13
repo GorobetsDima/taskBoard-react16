@@ -22,7 +22,7 @@ module.exports =
             port: 3030,
             hot: true,
             proxy: {
-                "/api": "http://localhost:3000"
+                "/": "http://localhost:8080"
             }
         },
         module: {

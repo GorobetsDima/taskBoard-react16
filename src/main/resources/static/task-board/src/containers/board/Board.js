@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import "./Board.css";
 import Lane from "../../components/lane/Lane";
 import NavBar from "../../components/navbar/NavBar";
-import {cardActions, fetchTasks, deleteCard, expressFetch} from "../../actions/actions";
-import data from "../../../data.json";
+import {cardActions, laneActions, deleteCard, fetchTasksFromMongo} from "../../actions/actions";
 import {Row} from "reactstrap";
 
 
@@ -17,6 +16,7 @@ import {Row} from "reactstrap";
         // express: state.boardReducer.express
 
     }), {
+        fetchSaga: laneActions.lane.fetchsaga,
         getUpdatedCard: cardActions.card.getupdated,
         moveCard: cardActions.card.move,
         reorderCards: cardActions.card.reorder,
@@ -24,7 +24,8 @@ import {Row} from "reactstrap";
         resetFilter: cardActions.card.resetfilter,
         // fetchTasks,
         deleteCard,
-        expressFetch
+        // expressFetch,
+        fetchTasksFromMongo
     }
 )
 
@@ -50,10 +51,10 @@ export default class Board extends Component {
         // const {fetchTasks}= this.props;
         // fetchTasks(data.lanes);
 
-        const {expressFetch} = this.props;
-
-        expressFetch();
-
+        const {expressFetch, fetchTasksFromMongo, fetchSaga} = this.props;
+        // fetchTasksFromMongo();
+        // expressFetch();
+        fetchSaga();
     }
 
     getList = id => {

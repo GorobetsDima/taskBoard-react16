@@ -1,4 +1,5 @@
 import {createActions} from "redux-actions";
+import {takeEvery,takeLatest, put, call, all} from "redux-saga/effects";
 import {toastr} from "react-redux-toastr";
 import axios from "axios";
 
@@ -6,6 +7,7 @@ import axios from "axios";
 export const laneActions = createActions({
     LANE: {
         FETCH: () => ({isLoading: true}),
+        FETCHSAGA: () => ({}),
         FETCHSUCCESS: data => ({data}),
         FETCHFAILURE: error => ({message: error}),
         EXPRESS: data => ({lanes: data})
@@ -15,6 +17,7 @@ export const laneActions = createActions({
 export const cardActions = createActions({
     CARD: {
         ADDORUPDATE: (laneId, cardId, data) => ({laneId: laneId, cardId: cardId, card: data}),
+        ADDORUPDATESAGA: (laneId, cardId, data) => ({laneId: laneId, cardId: cardId, card: data}),
         DELETE: () => () => ({isLoading: true}),
         DELETESUCCESS: (laneId, cardId) => ({laneId: laneId, cardId: cardId}),
         DELETEFAILURE: error => ({message: error}),
@@ -27,6 +30,8 @@ export const cardActions = createActions({
 
 });
 
+
+//import data from json file with thunk
 export const fetchTasks = (data) => {
 
     return (dispatch) => {
@@ -75,9 +80,10 @@ export const saveOrUpdateCard = (laneId, cardId, card) => {
 
         // dispatch(cardActions.card.delete());
 
-        const response = axios.post('/api/saveCard', {
+        const response = axios.post('/saveCard', {
             'card': card,
-            'laneId': laneId});
+            'laneId': laneId
+        });
 
         return response.then(
             () => {
@@ -105,6 +111,16 @@ const pending = (data) => {
     })
 };
 
+function* watchFetchTasks() {
+    yield takeEvery('LANE/FETCHSAGA', fetchTasksSagaAsync);
+}
+
+function* watchAddCards() {
+    yield takeLatest('CARD/ADDORUPDATESAGA', saveOrUpdateCardSaga);
+}
+
+
+//import data from java server(mongo db) via express server with thunk
 export const expressFetch = () => {
 
     return (dispatch) => {
@@ -126,3 +142,76 @@ export const expressFetch = () => {
         )
     }
 };
+
+//import data from java server(mongo db) with thunk
+export const fetchTasksFromMongo = () => {
+
+    return (dispatch) => {
+
+        dispatch(laneActions.lane.fetch());
+
+        const response = axios.get('/lanes');
+
+        return response.then(
+            resp => {
+                toastr.success('Loading lanes from server', 'success');
+                dispatch(laneActions.lane.fetchsuccess(resp.data));
+                // dispatch(laneActions.lane.express(resp.data.express))
+            }, error => {
+                toastr.error(error);
+                dispatch(laneActions.lane.fetchfailure(error));
+                // console.log(error);
+            }
+        )
+    }
+};
+
+//import data from java server(mongo db) with saga
+function*  fetchTasksSagaAsync() {
+
+    try {
+        yield put(laneActions.lane.fetch());
+
+        const responseData = yield call(() => {
+            return axios.get('/lanes').then(resp => resp.data);
+        });
+
+        toastr.success('Loading lanes from server', 'success');
+
+        yield put(laneActions.lane.fetchsuccess(responseData));
+    } catch (error) {
+        toastr.error(error);
+        yield put(laneActions.lane.fetchfailure(error));
+    }
+
+}
+
+//save card to java server(mongo db) with saga
+function* saveOrUpdateCardSaga({payload:{card, laneId}}) {
+
+    try {
+        // yield put(laneActions.lane.fetch());
+
+        const responseData = yield call(() => {
+            return axios.post('/saveCard', {
+                'card': card,
+                'laneId': laneId
+            }).then(resp => resp.data);
+        });
+
+        toastr.success('Save card', 'success');
+
+        // yield put(laneActions.lane.fetchsuccess(responseData));
+    } catch (error) {
+        toastr.error(error);
+        // yield put(laneActions.lane.fetchfailure(error));
+    }
+
+}
+
+export default function* rootSaga() {
+    yield all([
+        watchFetchTasks(),
+        watchAddCards()
+    ])
+}

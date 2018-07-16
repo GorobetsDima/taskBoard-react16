@@ -27,7 +27,7 @@ class Lane extends Component {
     }
 
     addCard() {
-        this.props.history.push(`/cardForm/${this.props.lane._id}`);
+        this.props.history.push(`/cardForm/${this.props.lane.id}`);
     }
 
     render() {

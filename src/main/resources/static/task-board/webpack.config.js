@@ -21,9 +21,9 @@ module.exports =
             host: 'localhost',
             port: 3030,
             hot: true,
-            proxy: {
-                "/api": "http://localhost:3000"
-            }
+            // proxy: {
+            //     "/api": "http://localhost:3000"
+            // }
         },
         module: {
             loaders: [

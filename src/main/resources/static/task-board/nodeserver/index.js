@@ -28,7 +28,7 @@ app.get('/', (request, response) => {
     })
 });
 
-app.get('/api/lanes', (req, res) => {
+app.get('/lanes', (req, res) => {
     const backReq = axios.get('http://localhost:8080/lanes');
     backReq.then(resp => {
             res.send({lanes: resp.data});
@@ -36,7 +36,7 @@ app.get('/api/lanes', (req, res) => {
         error => console.log(error));
 });
 
-app.post('/api/saveCard', (req, res) => {
+app.post('/saveCard', (req, res) => {
     console.log("start saveCard");
     console.log(req.body);
     const backReq = axios.post('http://localhost:8080/saveCard', {

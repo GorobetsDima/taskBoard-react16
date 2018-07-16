@@ -24,6 +24,9 @@ module.exports =
             proxy: {
                 "/": "http://localhost:8080"
             }
+            // proxy: {
+            //     "/": "http://localhost:3000"
+            // }
         },
         module: {
             loaders: [

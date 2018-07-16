@@ -14,7 +14,8 @@ export const boardReducer = handleActions({
         [laneActions.lane.fetchsuccess] (state, {payload:{data}}) {
             return {
                 ...state,
-                lanes: [...data]
+                // lanes: [...data.lanes] //for mongo with proxy node server
+                lanes: [...data] //for mongo without proxy node server
             };
         },
         [cardActions.card.deletesuccess] (state, {payload:{laneId, cardId}}){

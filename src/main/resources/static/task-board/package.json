@@ -2,7 +2,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server & DEBUG=express* node ./nodeserver/index.js"
   },
   "dependencies": {
     "axios": "~0.14.0",
